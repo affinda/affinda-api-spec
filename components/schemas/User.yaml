@@ -1,0 +1,15 @@
+type: object
+additionalProperties: false
+properties:
+  documentCount:
+    type: integer
+  redactedDocumentCount:
+    type: integer
+  reformattedResumeCount:
+    type: integer
+  parsingCredits:
+    type: integer
+  redactionCredits:
+    type: integer
+  reformattingCredits:
+    type: integer

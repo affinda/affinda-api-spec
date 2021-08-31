@@ -1,0 +1,72 @@
+get:
+  tags:
+    - Parser
+  summary: Gets summary information for all resumes of a user
+  operationId: getAllResumes
+  description: 'Returns all the resume summaries for that user, limited to 300 per page.'
+  parameters:
+    - $ref: "../components/parameters/limitParam.yaml"
+    - $ref: "../components/parameters/offsetParam.yaml"
+  responses:
+    '200':
+      description: All resumes for user
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/GetAllDocumentsResults.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+post:
+  tags:
+    - Parser
+  summary: Uploads a resume for parsing
+  operationId: createResume
+  description: >-
+    Uploads a resume for parsing.
+
+    When successful, returns an `identifier` in the response for subsequent use
+    with the [/resumes/{identifier}](#operation/getResume) endpoint to check
+    processing status and retrieve results.
+  responses:
+    '200':
+      description: Only returned when wait=True, will return the created resume
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/Resume.yaml"
+    '201':
+      description: Only returned when wait=False, will return  uploaded and identifier created
+      x-summary: Document uploaded and created, use resume.meta.identifier to poll for processing status
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/Resume.yaml"
+    '400':
+      $ref: "../components/responses/400Error.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+  requestBody:
+    description: 'Resume to upload, either via fileupload or URL to a file'
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          additionalProperties: false
+          properties:
+            file:
+              $ref: "../components/schemas/File.yaml"
+            identifier:
+              $ref: "../components/schemas/Identifier.yaml"
+            fileName:
+              $ref: "../components/schemas/FileName.yaml"
+            url:
+              $ref: "../components/schemas/UrlToProcess.yaml"
+            wait:
+              $ref: "../components/schemas/Wait.yaml"
+            resumeLanguage:
+              $ref: "../components/schemas/ResumeLanguage.yaml"
+            expiryTime:
+              $ref: "../components/schemas/ExpiryTime.yaml"

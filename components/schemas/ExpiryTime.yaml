@@ -1,0 +1,3 @@
+type: string
+nullable: true
+description: The date/time in ISO-8601 format when the resume will be automatically deleted.  Defaults to no expiry.

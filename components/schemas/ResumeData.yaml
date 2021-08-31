@@ -1,0 +1,278 @@
+type: object
+additionalProperties: false
+nullable: true
+properties:
+  name:
+    type: object
+    nullable: true
+    additionalProperties: false
+    properties:
+      raw:
+        type: string
+        example: Tim A. Smith
+      first:
+        type: string
+        example: Tim
+      last:
+        type: string
+        example: Smith
+      middle:
+        type: string
+        example: A.
+      title:
+        type: string
+        example: Dr
+  phoneNumbers:
+    type: array
+    items:
+      type: string
+    example:
+      - "(704) 996-9966"
+      - "+61412632636"
+  websites:
+    type: array
+    items:
+      type: string
+    example:
+      - aaa@linked.com
+  emails:
+    type: array
+    items:
+      type: string
+      format: email
+    example:
+      - timsmith@vt.edu
+  dateOfBirth:
+    type: string
+    example: '1992-01-01'
+    nullable: true
+  location:
+    $ref: ./Location.yaml
+  objective:
+    type: string
+  languages:
+    type: array
+    items:
+      type: string
+    example:
+      - English
+      - French
+      - Arabic
+  summary:
+    type: string
+  totalYearsExperience:
+    type: integer
+    example: 12
+  headShot:
+    type: string
+    format: binary
+    nullable: true
+    description: base64 encoded string
+  education:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        organization:
+          type: string
+          nullable: true
+          example: Virginia Polytechnic Institute and State University (Virginia Tech)
+        accreditation:
+          type: object
+          nullable: true
+          additionalProperties: false
+          properties:
+            education:
+              type: string
+              example: Bachelor of Science
+            inputStr:
+              type: string
+              example: 'Bachelor of Science, Mechanical Engineering, expected'
+            matchStr:
+              type: string
+              nullable: true
+              example: Bachelor of Science
+            educationLevel:
+              type: string
+              nullable: true
+              example: bachelors
+        grade:
+          type: object
+          additionalProperties: false
+          properties:
+            raw:
+              type: string
+              example: 'GPA : 3.35'
+            metric:
+              type: string
+              example: GPA
+            value:
+              type: string
+              example: '3.35'
+          nullable: true
+        location:
+          $ref: ./Location.yaml
+        dates:
+          type: object
+          nullable: true
+          additionalProperties: false
+          properties:
+            completionDate:
+              type: string
+              format: date
+              example: '2021-05-01'
+            isCurrent:
+              type: boolean
+            startDate:
+              type: string
+              format: date
+              nullable: true
+              example: '2019-05-01'
+  workExperience:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        jobTitle:
+          type: string
+          nullable: true
+          example: Product Design Engineer Intern
+        organization:
+          type: string
+          nullable: true
+          example: Company Power Generation
+        location:
+          $ref: ./Location.yaml
+        jobDescription:
+          type: string
+          nullable: true
+          example: Interned with supercar Development from May 2017 to August 2017.
+        dates:
+          type: object
+          additionalProperties: false
+          nullable: true
+          properties:
+            startDate:
+              type: string
+              format: date
+              nullable: true
+              example: '2018-05-01'
+            endDate:
+              type: string
+              format: date
+              nullable: true
+              example: '2018-08-01'
+            monthsInPosition:
+              type: integer
+              nullable: true
+            isCurrent:
+              type: boolean
+  skills:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          example: Applied Mechanics
+        lastUsed:
+          nullable: true
+          type: string
+          example: '2012-01-01'
+        numberOfMonths:
+          type: integer
+          nullable: true
+          example: 12
+        type:
+          type: string
+          example: hard_skill
+        sources:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              section:
+                type: string
+                example: WorkExperience
+              position:
+                type: integer
+                nullable: true
+                example: 0
+  certifications:
+    type: array
+    items:
+      type: string
+    example:
+      - Certificate in AWS
+  publications:
+    type: array
+    items:
+      type: string
+    example:
+      - >-
+        Tim Smith et al., Investigations of nanoparticles in the pathology of
+        the human eye, Cell 2014
+  referees:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          example: Stephen Smith
+          nullable: true
+        text:
+          type: string
+          example: >-
+            Stephen Smith, Team Member/Mentor, Company Power Generation:
+            stephen.smith@company.com
+        email:
+          type: string
+          format: email
+          example: stephen.smith@company.com
+          nullable: true
+        number:
+          type: string
+          example: '+61490667215'
+          nullable: true
+  sections:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        sectionType:
+          type: string
+          example: PersonalDetails
+        bbox:
+          type: array
+          items:
+            type: number
+          example:
+            - 0
+            - 36.392
+            - 612
+            - 111.056
+          minItems: 4
+          maxItems: 4
+        pageIndex:
+          type: integer
+        text:
+          type: string
+          example: '<All text from the {sectionType} section>'
+  isResumeProbability:
+    type: integer
+    example: 98
+    description: >-
+      Probability that the given document is a resume. Values below 30 suggest
+      that the resume is not a resume.
+
+  rawText:
+    type: string
+    example: 'Christopher Nolan 3210 fake street ... <rest of resume text>'
+    description: All of the raw text of the parsed resume, example is shortened for readiblity

@@ -1,0 +1,5 @@
+type: string
+format: url
+description: The template to apply
+example: >-
+  https://api-data.affinda.com/media/resume_formats/Example-Resume-Template.docx

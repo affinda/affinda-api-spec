@@ -1,0 +1,5 @@
+type: string
+format: url
+nullable: true
+description: URL to file to download and process
+example: "https://www.example.com/resume.pdf"

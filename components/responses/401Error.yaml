@@ -1,0 +1,13 @@
+description: Authorisation error
+content:
+  application/json:
+    schema:
+      type: object
+      additionalProperties: false
+      properties:
+        detail:
+          type: string
+          example: Invalid token header. No credentials provided.
+        statusCode:
+          type: integer
+          example: 401

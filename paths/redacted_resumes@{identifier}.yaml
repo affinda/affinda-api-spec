@@ -1,0 +1,51 @@
+get:
+  tags:
+    - Redactor
+  summary: Gets redaction results for a specific resume
+  operationId: getRedactedResume
+  description: >-
+    Returns all the redaction results for that resume if processing is
+    completed.
+
+    The `identifier` is the unique ID returned after POST-ing the resume via the
+    [/redacted_resumes](#operation/createRedactedResume) endpoint.
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Document identifier
+      schema:
+        type: string
+        example: EUglqBoT
+  responses:
+    '200':
+      description: Successfully retrieved resume
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RedactedResume.yaml
+    '401':
+      $ref: ../components/responses/401Error.yaml
+    '404':
+      $ref: ../components/responses/404Error.yaml
+delete:
+  tags:
+    - Redactor
+  summary: Deletes a redacted resume
+  operationId: deleteRedactedResume
+  description: Deletes the specified resume from the database
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Document identifier
+      schema:
+        type: string
+        example: EUglqBoT
+  responses:
+    '204':
+      $ref: ../components/responses/204NoContent.yaml
+    '401':
+      $ref: ../components/responses/401Error.yaml
+    '404':
+      $ref: ../components/responses/404Error.yaml

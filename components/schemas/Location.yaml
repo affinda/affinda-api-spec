@@ -1,0 +1,41 @@
+type: object
+additionalProperties: false
+nullable: true
+required:
+  - rawInput
+properties:
+  formatted:
+    type: string
+    nullable: true
+    example: 'Blacksburg, VA, USA'
+  postalCode:
+    type: string
+    example: '3124'
+    nullable: true
+  state:
+    type: string
+    nullable: true
+    example: Virginia
+  country:
+    type: string
+    nullable: true
+    example: United States
+  rawInput:
+    type: string
+    example: 'Blacksburg, VA'
+  streetNumber:
+    type: string
+    nullable: true
+    example: '1'
+  street:
+    type: string
+    nullable: true
+    example: Smith St
+  apartmentNumber:
+    type: string
+    nullable: true
+    example: '12'
+  city:
+    type: string
+    nullable: true
+    example: Blacksburg

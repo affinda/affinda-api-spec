@@ -1,0 +1,48 @@
+get:
+  tags:
+    - Parser
+  summary: Gets parse results for a specific resume
+  operationId: getResume
+  description: >-
+    Returns all the parse results for that resume if processing is completed.
+
+    The `identifier` is the unique ID returned after POST-ing the resume via the
+    [/resumes](#operation/createResume) endpoint.
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Document identifier
+      schema:
+        $ref: "../components/schemas/Identifier.yaml"
+  responses:
+    '200':
+      description: Successfully retrieved resume
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/Resume.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+delete:
+  tags:
+    - Parser
+  summary: Deletes a resume
+  operationId: deleteResume
+  description: Deletes the specified resume from the database
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Resume identifier
+      schema:
+        $ref: "../components/schemas/Identifier.yaml"
+  responses:
+    '204':
+      $ref: "../components/responses/204NoContent.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"

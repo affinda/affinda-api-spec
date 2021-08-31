@@ -1,0 +1,49 @@
+get:
+  tags:
+    - Reformatter
+  summary: Gets reformatting results for a specific resume
+  operationId: getReformattedResume
+  description: >-
+    Returns all the reformatting results for that resume if processing is
+    completed.
+
+    The `identifier` is the unique ID returned after POST-ing the resume via the
+    [/reformatted_resumes](#operation/createReformattedResume) endpoint.
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Document identifier
+      schema:
+        $ref: "../components/schemas/Identifier.yaml"
+  responses:
+    '200':
+      description: Successfully retrieved reformatted resume
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/ReformattedResume.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+delete:
+  tags:
+    - Reformatter
+  summary: Deletes a reformatted resume
+  operationId: deleteReformattedResume
+  description: Deletes the specified resume from the database
+  parameters:
+    - in: path
+      required: true
+      name: identifier
+      description: Document identifier
+      schema:
+        $ref: "../components/schemas/Identifier.yaml"
+  responses:
+    '204':
+      $ref: "../components/responses/204NoContent.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"

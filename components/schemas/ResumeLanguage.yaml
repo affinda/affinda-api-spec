@@ -1,0 +1,4 @@
+type: string
+nullable: true
+description: Language code in ISO 639-1 format. Must specify zh-cn or zh-tw for Chinese.
+example: "en"

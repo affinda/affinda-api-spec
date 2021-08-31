@@ -1,0 +1,12 @@
+description: Only returned when wait=False, will return  uploaded and identifier created
+content:
+  application/json:
+    schema:
+      type: object
+      additionalProperties: false
+      properties:
+        fileName:
+          $ref: "../schemas/FileName.yaml"
+        identifier:
+          $ref: "../schemas/Identifier.yaml"
+x-summary: Document uploaded and created, use identifier at GET endpoint to poll for processing status

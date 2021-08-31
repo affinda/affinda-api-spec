@@ -1,0 +1,16 @@
+type: object
+additionalProperties: false
+required:
+  - data
+  - meta
+  - error
+#  - user
+properties:
+  data:
+    $ref: "./ResumeData.yaml"
+  meta:
+    $ref: "./Meta.yaml"
+  error:
+    $ref: "./Error.yaml"
+#  user:
+#    $ref: "./User.yaml"

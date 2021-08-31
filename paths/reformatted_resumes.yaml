@@ -1,0 +1,80 @@
+get:
+  tags:
+    - Reformatter
+  summary: Gets summary information for all reformatted resumes of a user
+  operationId: getAllReformattedResumes
+  description: Returns all the reformatted resume information for that resume
+  parameters:
+    - $ref: ../components/parameters/limitParam.yaml
+    - $ref: ../components/parameters/offsetParam.yaml
+  responses:
+    '200':
+      description: All reformatted resumes for user
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/GetAllDocumentsResults.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+post:
+  tags:
+    - Reformatter
+  summary: Uploads a resume for reformatting
+  operationId: createReformattedResume
+  description: Uploads a resume for reformatting.
+  responses:
+    '200':
+      description: Only returned when wait=True, will return the created reformatted resume
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/ReformattedResume.yaml"
+
+    '201':
+      description: >-
+        When successful, returns an `identifier` in the response for subsequent use with the
+        [ /reformatted_resumes/{ identifier } ](#operation/getReformattedResume) endpoint to check processing
+        status and retrieve results.
+      x-summary: Document uploaded and created, use reformatted_resume.meta.identifier to poll for processing status
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/ReformattedResume.yaml"
+      links:
+        GetReformattedDocumentByIdentifier:
+          operationId: getReformattedResume
+          parameters:
+            userId: $response.body#/meta/identifier
+    '400':
+      $ref: "../components/responses/400Error.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+  requestBody:
+    description: 'Resume resume to upload, either via a binary file or URL to a file'
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          additionalProperties: false
+          required:
+            - resumeFormat
+          properties:
+            file:
+              $ref: "../components/schemas/File.yaml"
+            identifier:
+              $ref: "../components/schemas/Identifier.yaml"
+            fileName:
+              $ref: "../components/schemas/FileName.yaml"
+            url:
+              $ref: "../components/schemas/UrlToProcess.yaml"
+            resumeLanguage:
+              $ref: "../components/schemas/ResumeLanguage.yaml"
+            resumeFormat:
+              $ref: "../components/schemas/ResumeFormat.yaml"
+            wait:
+              $ref: "../components/schemas/Wait.yaml"

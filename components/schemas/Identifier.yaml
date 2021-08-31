@@ -1,0 +1,4 @@
+type: string
+nullable: true
+description: Unique identifier for the resume. If creating a document and left blank, one will be automatically generated.
+example: EUglqBoT

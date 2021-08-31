@@ -1,0 +1,11 @@
+type: object
+additionalProperties: false
+properties:
+  errorCode:
+    type: string
+    nullable: true
+    example: "document_conversion_failed"
+  errorDetail:
+    type: string
+    nullable: true
+    example: "Unable to convert word document"

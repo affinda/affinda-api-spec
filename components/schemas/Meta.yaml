@@ -1,0 +1,31 @@
+type: object
+additionalProperties: false
+required:
+  - identifier
+  - ready
+  - failed
+properties:
+  identifier:
+    $ref: "./Identifier.yaml"
+  fileName:
+    $ref: "./FileName.yaml"
+  ready:
+    type: boolean
+    nullable: false
+    example: true
+    description: >-
+      If true, the document has finished processing. Particularly useful if an endpoint request specified wait=False,
+      when polling use this variable to determine when to stop polling
+  readyDt:
+    type: string
+    format: date-time
+    example: '2020-12-10T01:43:32.276724Z'
+    nullable: true
+    description: The datetime when the document was ready
+  failed:
+    type: boolean
+    nullable: false
+    example: false
+    description: If true, some exception was raised during processing. Check the 'error' field of the main return object.
+  expiryTime:
+    $ref: "./ExpiryTime.yaml"

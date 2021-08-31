@@ -1,0 +1,46 @@
+get:
+  tags:
+    - Reformatter
+  summary: Gets summary information for all resume formats of a user
+  operationId: getAllResumeFormats
+  description: Returns all the resume formats
+  parameters:
+    - $ref: "../components/parameters/limitParam.yaml"
+    - $ref: "../components/parameters/offsetParam.yaml"
+  responses:
+    '200':
+      description: All resume formats for user
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              count:
+                type: integer
+                example: 1
+              next:
+                type: string
+                format: url
+                nullable: true
+              previous:
+                type: string
+                format: url
+                nullable: true
+              results:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+                  required:
+                    - identifier
+                    - formatFile
+                  properties:
+                    identifier:
+                      $ref: "../components/schemas/Identifier.yaml"
+                    formatFile:
+                      $ref: "../components/schemas/ResumeFormatFile.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"

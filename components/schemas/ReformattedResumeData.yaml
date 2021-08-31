@@ -1,0 +1,8 @@
+type: object
+additionalProperties: false
+nullable: true
+properties:
+  reformattedFile:
+    type: string
+    format: url
+    example: 'https://api-data.affinda.com/media/redacted_resumes/resume_reformatted.pdf'

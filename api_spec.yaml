@@ -1,0 +1,84 @@
+openapi: "3.0.3"
+servers:
+  - url: 'https://api.affinda.com/v1'
+info:
+  description: >-
+    # Suggested Workflow
+
+    To parse a resume:
+
+    - Obtain an [API key](https://affinda.com/resume-parser)
+
+    - `POST` to the [/resumes](#operation/createResume) endpoint to upload
+    either a .docx, or .pdf file, or supply a URL to a .docx or .pdf file.
+
+    - After a successful upload, an `identifier` will be returned which uniquely
+    identifies the request. Note that the response to this upload **will not**
+    contain the parsed results yet.
+
+    - The parse typically takes 2-5 seconds to complete. To retrieve the status
+    of the parse, use the identifier from the previous step and the
+    [/resumes/{identifier}](#operation/getResume) endpoint.  We recommend
+    polling every second.
+
+    - When the `meta.ready` property of the response is true the `data` property
+    will be populated with the parsed resume data.
+
+
+    To delete a resume, use the
+    [/resumes/{identifier}](#operation/deleteResume) endpoint.
+
+
+    To list all resumes uploaded by the the authenticated user, use the
+    [/resumes/](#operation/getAllResumes) endpoint with a `GET` request.
+  version: v1
+  title: Affinda API
+  contact:
+    email: contact@affinda.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  x-logo:
+    url: 'https://api.affinda.com/static/documentation/affinda_logo_black.png'
+    backgroundColor: '#FFFFFF'
+    altText: Affinda logo
+tags:
+  - name: Parser
+    description: Operations available to perform on parsed resumes
+  - name: Redactor
+    description: Operations available to perform on redacted resumes
+  - name: Reformatter
+    description: Operations available to perform on reformatted resumes
+x-tagGroups:
+  - name: Resumes
+    tags:
+      - Parser
+      - Redactor
+      - Reformatter
+security:
+  - ApiKeyAuth: [ ]
+paths:
+  /resumes:
+    $ref: 'paths/resumes.yaml'
+  '/resumes/{identifier}':
+    $ref: 'paths/resumes@{identifier}.yaml'
+  /redacted_resumes:
+    $ref: 'paths/redacted_resumes.yaml'
+  '/redacted_resumes/{identifier}':
+    $ref: 'paths/redacted_resumes@{identifier}.yaml'
+  /resume_formats:
+    $ref: 'paths/resume_formats.yaml'
+  /reformatted_resumes:
+    $ref: 'paths/reformatted_resumes.yaml'
+  '/reformatted_resumes/{identifier}':
+    $ref: 'paths/reformatted_resumes@{identifier}.yaml'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Basic authentication using an API token, e.g. `{Authorization: Bearer
+        75z0bb4fbdf97b7e4111ff6c0015471094155f91}`
+
+        You can obtain an authentication token [here](https://affinda.com/resume-parser)

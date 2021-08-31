@@ -1,0 +1,107 @@
+get:
+  tags:
+    - Redactor
+  summary: Gets summary information for all redacted resumes of a user
+  operationId: getAllRedactedResumes
+  description: Returns all the redacted resume information for that resume
+  parameters:
+    - $ref: "../components/parameters/limitParam.yaml"
+    - $ref: "../components/parameters/offsetParam.yaml"
+  responses:
+    '200':
+      description: All redacted resumes for user
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/GetAllDocumentsResults.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+post:
+  tags:
+    - Redactor
+  summary: Uploads a resume for redacting
+  operationId: createRedactedResume
+  description: >-
+    Uploads a resume for redacting.
+
+  responses:
+    '200':
+      description: Only returned when wait=True, will return the created redacted resume
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/RedactedResume.yaml"
+    '201':
+      description: >-
+        When successful, returns an `identifier` in the response for subsequent use with the
+        [/redacted_resumes/{identifier}](#operation/getRedactedResume) endpoint to check processing status and
+        retrieve results.
+      x-summary: Document uploaded and created, use redacted_resume.meta.identifier to poll for processing status
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/RedactedResume.yaml"
+      links:
+        GetRedactedDocumentByIdentifier:
+          operationId: getRedactedResume
+          parameters:
+            userId: $response.body#/meta/identifier
+    '400':
+      $ref: "../components/responses/400Error.yaml"
+    '401':
+      $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+  requestBody:
+    description: Resume to upload, either via fileupload or URL to a file
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          additionalProperties: false
+          properties:
+            file:
+              $ref: "../components/schemas/File.yaml"
+            identifier:
+              $ref: "../components/schemas/Identifier.yaml"
+            fileName:
+              $ref: "../components/schemas/FileName.yaml"
+            url:
+              $ref: "../components/schemas/UrlToProcess.yaml"
+            resumeLanguage:
+              $ref: "../components/schemas/ResumeLanguage.yaml"
+            wait:
+              $ref: "../components/schemas/Wait.yaml"
+            redactHeadshot:
+              type: boolean
+              description: Whether to redact headshot
+              default: true
+            redactPersonalDetails:
+              type: boolean
+              description: Whether to redact personal details (e.g. name, address)
+              default: true
+            redactWorkDetails:
+              type: boolean
+              description: Whether to redact work details (e.g. company names)
+              default: true
+            redactEducationDetails:
+              type: boolean
+              description: Whether to redact education details (e.g. university names)
+              default: true
+            redactReferees:
+              type: boolean
+              description: Whether to redact referee details
+              default: true
+            redactLocations:
+              type: boolean
+              description: Whether to redact location names
+              default: true
+            redactDates:
+              type: boolean
+              description: Whether to redact dates
+              default: true
+            expiryTime:
+              $ref: "../components/schemas/ExpiryTime.yaml"
