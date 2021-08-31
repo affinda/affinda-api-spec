@@ -13,5 +13,11 @@ by [autorest](https://github.com/Azure/autorest):
 
 It conforms to the [OpenAPI 3.0 specification](https://swagger.io/specification/).
 
+### Updating the spec
+
 Note that the `api_spec_bundled.yaml` and `api_spec_with_examples.json` files are generated dynamically, and should not
 be edited manually!
+
+After editing spec, run `../client_libraries/gen_api_clients_and_docs.sh` before committing to regenerate these files.
+
+
