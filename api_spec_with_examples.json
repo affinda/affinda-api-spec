@@ -13,8 +13,8 @@
       "email": "contact@affinda.com"
     },
     "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/affinda/affinda-api-spec/main/LICENSE"
     },
     "x-logo": {
       "url": "https://api.affinda.com/static/documentation/affinda_logo_black.png",
