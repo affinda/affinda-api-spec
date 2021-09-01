@@ -1,7 +1,7 @@
 get:
   tags:
     - Parser
-  summary: Gets summary information for all resumes of a user
+  summary: Gets list of all resumes
   operationId: getAllResumes
   description: 'Returns all the resume summaries for that user, limited to 300 per page.'
   parameters:

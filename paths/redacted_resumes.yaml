@@ -1,7 +1,7 @@
 get:
   tags:
     - Redactor
-  summary: Gets summary information for all redacted resumes of a user
+  summary: Gets list of all redacted resumes
   operationId: getAllRedactedResumes
   description: Returns all the redacted resume information for that resume
   parameters:
