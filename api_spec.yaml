@@ -3,34 +3,20 @@ servers:
   - url: 'https://api.affinda.com/v1'
 info:
   description: >-
-    # Suggested Workflow
+    Documentation for the [Affinda API](https://github.com/affinda/affinda-api-spec).
 
-    To parse a resume:
+    # Quickstart
 
-    - Obtain an [API key](https://affinda.com/resume-parser)
+    * Obtain an [API key](https://affinda.com/resume-parser/free-api-key/)
 
-    - `POST` to the [/resumes](#operation/createResume) endpoint to upload
-    either a .docx, or .pdf file, or supply a URL to a .docx or .pdf file.
+    * (Recommended) Download and install one of our client libraries:
+      * [Python](https://github.com/affinda/affinda-python) : `pip install affinda`
+      * [Javascript](https://github.com/affinda/affinda-python) : `npm install @affinda/affinda`
+      * [C# - coming soon](https://github.com/affinda/affinda-csharp)
+      * [Java - coming soon](https://github.com/affinda/affinda-java)
 
-    - After a successful upload, an `identifier` will be returned which uniquely
-    identifies the request. Note that the response to this upload **will not**
-    contain the parsed results yet.
+    * Without a client library, API requests via HTTP can be made as defined below
 
-    - The parse typically takes 2-5 seconds to complete. To retrieve the status
-    of the parse, use the identifier from the previous step and the
-    [/resumes/{identifier}](#operation/getResume) endpoint.  We recommend
-    polling every second.
-
-    - When the `meta.ready` property of the response is true the `data` property
-    will be populated with the parsed resume data.
-
-
-    To delete a resume, use the
-    [/resumes/{identifier}](#operation/deleteResume) endpoint.
-
-
-    To list all resumes uploaded by the the authenticated user, use the
-    [/resumes/](#operation/getAllResumes) endpoint with a `GET` request.
   version: v1
   title: Affinda API
   contact:
@@ -78,7 +64,7 @@ components:
       type: http
       scheme: bearer
       description: >-
-        Basic authentication using an API token, e.g. `{Authorization: Bearer
+        Basic authentication using an API key, e.g. `{Authorization: Bearer
         75z0bb4fbdf97b7e4111ff6c0015471094155f91}`
 
-        You can obtain an authentication token [here](https://affinda.com/resume-parser)
+        You can obtain an API key [here](https://affinda.com/resume-parser/free-api-key/)

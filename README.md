@@ -1,5 +1,5 @@
 Affinda API Specification
-===================================
+=========================
 
 ![affinda logo](https://raw.githubusercontent.com/affinda/affinda-python/main/affinda_logo.png)
 
