@@ -179,7 +179,7 @@
         "x-codeSamples": [
           {
             "lang": "Python",
-            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    resume = client.create_resume(file=f, file_name=file_pth.name, wait=True)\n\nprint(resume.as_dict())\n"
+            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    resume = client.create_resume(file=f)\n\nprint(resume.as_dict())\n"
           },
           {
             "lang": "Shell + curl",
@@ -350,7 +350,7 @@
           },
           {
             "lang": "Javascript",
-            "source": "token = 'REPLACE_TOKEN';\n\nfetch('https://api.affinda.com/v1/redacted_resumes/', {\n    method: 'GET',\n    headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        'Content-Type': 'application/json',\n    }\n}).then(r => r.json()).then(r => console.log(r))\n"
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.getAllResumes()\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
           }
         ]
       },
@@ -474,7 +474,7 @@
         "x-codeSamples": [
           {
             "lang": "Python",
-            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    redacted_resume = client.create_redacted_resume(file=f, file_name=file_pth.name)\n\nprint(redacted_resume.as_dict())\n"
+            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    redacted_resume = client.create_redacted_resume(file=f)\n\nprint(redacted_resume.as_dict())\n"
           },
           {
             "lang": "Shell + curl",
@@ -544,7 +544,7 @@
           },
           {
             "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/redacted_resumes/${identifier}`,\n  {\n    method: 'GET',\n    headers: {\n      'Authorization': `Bearer ${token}`,\n      'Accept': 'application/json',\n      'Content-Type': 'application/json',\n    },\n  }).then(r => r.json()).then(r => console.log(r))\n"
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.getResume(\"REPLACE_IDENTIFIER\")\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
           }
         ]
       },
@@ -593,7 +593,7 @@
           },
           {
             "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/redacted_resumes/${identifier}`, {\n  method: 'DELETE',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  }\n})\n"
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.deleteResume(\"REPLACE_IDENTIFIER\")\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
           }
         ]
       }
