@@ -16,7 +16,7 @@ get:
       description: Document identifier
       schema:
         type: string
-        example: EUglqBoT
+        example: ELglqBoT
   responses:
     '200':
       description: Successfully retrieved resume

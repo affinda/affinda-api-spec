@@ -429,39 +429,39 @@
                     "$ref": "#/components/schemas/Wait"
                   },
                   "redactHeadshot": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact headshot",
-                    "default": true
+                    "default": "true"
                   },
                   "redactPersonalDetails": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact personal details (e.g. name, address)",
-                    "default": true
+                    "default": "true"
                   },
                   "redactWorkDetails": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact work details (e.g. company names)",
-                    "default": true
+                    "default": "true"
                   },
                   "redactEducationDetails": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact education details (e.g. university names)",
-                    "default": true
+                    "default": "true"
                   },
                   "redactReferees": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact referee details",
-                    "default": true
+                    "default": "true"
                   },
                   "redactLocations": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact location names",
-                    "default": true
+                    "default": "true"
                   },
                   "redactDates": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Whether to redact dates",
-                    "default": true
+                    "default": "true"
                   },
                   "expiryTime": {
                     "$ref": "#/components/schemas/ExpiryTime"
@@ -507,7 +507,7 @@
             "description": "Document identifier",
             "schema": {
               "type": "string",
-              "example": "EUglqBoT"
+              "example": "ELglqBoT"
             }
           }
         ],
@@ -988,7 +988,7 @@
         "type": "string",
         "nullable": true,
         "description": "Unique identifier for the resume. If creating a document and left blank, one will be automatically generated.",
-        "example": "EUglqBoT"
+        "example": "EhglqBoT"
       },
       "FileName": {
         "type": "string",
@@ -1081,10 +1081,9 @@
         "example": "https://www.example.com/resume.pdf"
       },
       "Wait": {
-        "type": "boolean",
-        "nullable": false,
-        "description": "If true (default), will return a response only after processing has completed. If false, will return an empty data object which can be polled at the GET endpoint until processing is complete.",
-        "example": true
+        "type": "string",
+        "description": "If \"true\" (default), will return a response only after processing has completed. If \"false\", will return an empty data object which can be polled at the GET endpoint until processing is complete.",
+        "example": "true"
       },
       "ResumeLanguage": {
         "type": "string",

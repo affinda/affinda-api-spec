@@ -76,32 +76,32 @@ post:
             wait:
               $ref: "../components/schemas/Wait.yaml"
             redactHeadshot:
-              type: boolean
+              type: string
               description: Whether to redact headshot
-              default: true
+              default: "true"
             redactPersonalDetails:
-              type: boolean
+              type: string
               description: Whether to redact personal details (e.g. name, address)
-              default: true
+              default: "true"
             redactWorkDetails:
-              type: boolean
+              type: string
               description: Whether to redact work details (e.g. company names)
-              default: true
+              default: "true"
             redactEducationDetails:
-              type: boolean
+              type: string
               description: Whether to redact education details (e.g. university names)
-              default: true
+              default: "true"
             redactReferees:
-              type: boolean
+              type: string
               description: Whether to redact referee details
-              default: true
+              default: "true"
             redactLocations:
-              type: boolean
+              type: string
               description: Whether to redact location names
-              default: true
+              default: "true"
             redactDates:
-              type: boolean
+              type: string
               description: Whether to redact dates
-              default: true
+              default: "true"
             expiryTime:
               $ref: "../components/schemas/ExpiryTime.yaml"
