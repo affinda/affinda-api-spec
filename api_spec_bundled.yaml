@@ -49,7 +49,7 @@ paths:
     get:
       tags:
         - Parser
-      summary: Gets summary information for all resumes of a user
+      summary: Gets list of all resumes
       operationId: getAllResumes
       description: 'Returns all the resume summaries for that user, limited to 300 per page.'
       parameters:
@@ -176,7 +176,7 @@ paths:
     get:
       tags:
         - Redactor
-      summary: Gets summary information for all redacted resumes of a user
+      summary: Gets list of all redacted resumes
       operationId: getAllRedactedResumes
       description: Returns all the redacted resume information for that resume
       parameters:
@@ -339,7 +339,7 @@ paths:
     get:
       tags:
         - Reformatter
-      summary: Gets summary information for all resume formats of a user
+      summary: Gets list of all resume formats
       operationId: getAllResumeFormats
       description: Returns all the resume formats
       parameters:
@@ -386,7 +386,7 @@ paths:
     get:
       tags:
         - Reformatter
-      summary: Gets summary information for all reformatted resumes of a user
+      summary: Gets list of all reformatted resumes
       operationId: getAllReformattedResumes
       description: Returns all the reformatted resume information for that resume
       parameters:
@@ -632,7 +632,7 @@ components:
       format: url
       nullable: true
       description: URL to file to download and process
-      example: 'https://www.example.com/resume.pdf'
+      example: 'https://api.affinda.com/static/sample_resumes/example.pdf'
     Wait:
       type: boolean
       nullable: false

@@ -57,7 +57,7 @@
         "tags": [
           "Parser"
         ],
-        "summary": "Gets summary information for all resumes of a user",
+        "summary": "Gets list of all resumes",
         "operationId": "getAllResumes",
         "description": "Returns all the resume summaries for that user, limited to 300 per page.",
         "parameters": [
@@ -179,7 +179,7 @@
         "x-codeSamples": [
           {
             "lang": "Python",
-            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    resume = client.create_resume(file=f, file_name=file_pth.name, wait=True)\n\nprint(resume.as_dict())\n"
+            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    resume = client.create_resume(file=f)\n\nprint(resume.as_dict())\n"
           },
           {
             "lang": "Shell + curl",
@@ -306,7 +306,7 @@
         "tags": [
           "Redactor"
         ],
-        "summary": "Gets summary information for all redacted resumes of a user",
+        "summary": "Gets list of all redacted resumes",
         "operationId": "getAllRedactedResumes",
         "description": "Returns all the redacted resume information for that resume",
         "parameters": [
@@ -474,7 +474,7 @@
         "x-codeSamples": [
           {
             "lang": "Python",
-            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    redacted_resume = client.create_redacted_resume(file=f, file_name=file_pth.name)\n\nprint(redacted_resume.as_dict())\n"
+            "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    redacted_resume = client.create_redacted_resume(file=f)\n\nprint(redacted_resume.as_dict())\n"
           },
           {
             "lang": "Shell + curl",
@@ -603,7 +603,7 @@
         "tags": [
           "Reformatter"
         ],
-        "summary": "Gets summary information for all resume formats of a user",
+        "summary": "Gets list of all resume formats",
         "operationId": "getAllResumeFormats",
         "description": "Returns all the resume formats",
         "parameters": [
@@ -693,7 +693,7 @@
         "tags": [
           "Reformatter"
         ],
-        "summary": "Gets summary information for all reformatted resumes of a user",
+        "summary": "Gets list of all reformatted resumes",
         "operationId": "getAllReformattedResumes",
         "description": "Returns all the reformatted resume information for that resume",
         "parameters": [
@@ -1078,7 +1078,7 @@
         "format": "url",
         "nullable": true,
         "description": "URL to file to download and process",
-        "example": "https://www.example.com/resume.pdf"
+        "example": "https://api.affinda.com/static/sample_resumes/example.pdf"
       },
       "Wait": {
         "type": "boolean",
