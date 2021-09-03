@@ -1,7 +1,7 @@
 get:
   tags:
     - Reformatter
-  summary: Gets summary information for all resume formats of a user
+  summary: Gets list of all resume formats
   operationId: getAllResumeFormats
   description: Returns all the resume formats
   parameters:
