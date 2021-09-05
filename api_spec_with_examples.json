@@ -85,20 +85,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nall_resumes = client.get_all_resumes()\n\nprint(all_resumes.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
-            "source": "TOKEN=\"REPLACE_TOKEN\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/documents\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
+            "lang": "shell",
+            "label": "Shell + curl",
+            "source": "TOKEN=\"REPLACE_TOKEN\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/resumes\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\ntoken = 'REPLACE_TOKEN';\n\nrequest('https://api.affinda.com/v1/documents', {\n    json: true,\n    headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n    if (err) { return console.log(err); }\n    console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "token = 'REPLACE_TOKEN';\n\nfetch('https://api.affinda.com/v1/documents/', {\n    method: 'GET',\n    headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        'Content-Type': 'application/json',\n    }\n}).then(r => r.json()).then(r => console.log(r))\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\n\nclient.getAllResumes().then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       },
@@ -178,20 +177,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    resume = client.create_resume(file=f)\n\nprint(resume.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
-            "source": "TOKEN=\"REPLACE_TOKEN\"\n\nPATH_TO_FILE=\"/path/to/file.pdf\"\n\ncurl --request POST \"https://api.affinda.com/v1/documents/\" \\\n  --location --compressed \\\n  --header \"Authorization: Bearer $TOKEN\" \\\n  --header \"Accept-Encoding: gzip, deflate\" \\\n  --header \"Content-Type: multipart/form-data\" \\\n  --form \"file=@$PATH_TO_FILE\" \\\n  --header \"accept: */*\" \\\n"
+            "lang": "shell",
+            "label": "Shell + curl",
+            "source": "TOKEN=\"REPLACE_TOKEN\"\n\nPATH_TO_FILE=\"/path/to/file.pdf\"\n\ncurl --request POST \"https://api.affinda.com/v1/resumes/\" \\\n  --location --compressed \\\n  --header \"Authorization: Bearer $TOKEN\" \\\n  --header \"Accept-Encoding: gzip, deflate\" \\\n  --header \"Content-Type: multipart/form-data\" \\\n  --form \"file=@$PATH_TO_FILE\" \\\n  --header \"accept: */*\" \\\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\n\n// With URL\nrequest.post('https://api.affinda.com/v1/documents/', {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n  body: { 'url': 'https://api.affinda.com/static/sample_resumes/example.pdf' }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\n// With URL as input\n\nfetch('https://api.affinda.com/v1/documents/', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({ url: 'https://api.affinda.com/static/sample_resumes/example.pdf' }),\n}).then(r => r.json()).then(r => console.log(r))\n\n\n// With an uploaded file from a form, e.g.\n// <input type=\"file\"/>\n// <button onclick=\"onUpload()\">Upload</button>\n\nfunction onUpload () {\n  const fileInput = document.querySelector('input') ;\n  const formData = new FormData()\n  formData.append('file', fileInput.files[0]);\n  formData.append('fileName', 'myCustomFilename.pdf')\n\n  fetch('https://api.affinda.com/v1/documents/', {\n      method: 'POST',\n      headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        // If you add this, upload won't work\n        // 'Content-Type': 'multipart/form-data'\n      },\n      body: formData,\n    }).then(r => r.json()).then(r => console.log(r))\n\n}\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, Aresumes_postffindaAPI} = require(\"@affinda/affinda\");\nconst fs = require(\"fs\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\nconst readStream = fs.createReadStream(\"PATH_TO_RESUME.pdf\");\n\nclient.createResume({file: readStream}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n// Can also use a URL:\n\nclient.createResume({url: \"https://api.affinda.com/static/sample_resumes/example.pdf\"}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       }
@@ -235,20 +233,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nresume = client.get_resume(identifier=identifier)\n\nprint(resume.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
-            "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/documents/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
+            "lang": "shell",
+            "label": "Shell + curl",
+            "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.get(`https://api.affinda.com/v1/documents/${identifier}`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/documents/${identifier}`,\n  {\n    method: 'GET',\n    headers: {\n      'Authorization': `Bearer ${token}`,\n      'Accept': 'application/json',\n      'Content-Type': 'application/json',\n    },\n  }).then(r => r.json()).then(r => console.log(r))\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.getResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       },
@@ -283,20 +280,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nresponse = client.delete_resume(identifier=identifier)\n\nprint(response.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
-            "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request DELETE --location \\\n  --url \"https://api.affinda.com/v1/documents/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
+            "lang": "shell",
+            "label": "Shell + curl",
+            "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request DELETE --location \\\n  --url \"https://api.affinda.com/v1/resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.delete(`https://api.affinda.com/v1/documents/${identifier}/`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/documents/${identifier}`, {\n  method: 'DELETE',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  }\n})\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.deleteResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       }
@@ -337,20 +333,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nall_redacted_resumes = client.get_all_redacted_resumes()\n\nprint(all_redacted_resumes.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/redacted_resumes\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\ntoken = 'REPLACE_TOKEN';\n\nrequest('https://api.affinda.com/v1/redacted_resumes', {\n    json: true,\n    headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n    if (err) { return console.log(err); }\n    console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.getAllResumes()\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\n\nclient.getAllRedactedResumes().then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       },
@@ -473,20 +468,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from pathlib import Path\n\nfrom affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    redacted_resume = client.create_redacted_resume(file=f)\n\nprint(redacted_resume.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\n\nPATH_TO_FILE=\"/path/to/file.pdf\"\n\ncurl --request POST \"https://api.affinda.com/v1/redacted_resumes/\" \\\n  --location --compressed \\\n  --header \"Authorization: Bearer $TOKEN\" \\\n  --header \"Accept-Encoding: gzip, deflate\" \\\n  --header \"Content-Type: multipart/form-data\" \\\n  --form \"file=@$PATH_TO_FILE\" \\\n  --header \"accept: */*\" \\\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\n\n// With URL\nrequest.post('https://api.affinda.com/v1/redacted_resumes/', {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n  body: { 'url': 'https://api.affinda.com/static/sample_resumes/example.pdf' }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\n// With URL as input\n\nfetch('https://api.affinda.com/v1/redacted_resumes/', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({ url: 'https://api.affinda.com/static/sample_resumes/example.pdf' }),\n}).then(r => r.json()).then(r => console.log(r))\n\n\n// With an uploaded file from a form, e.g.\n// <input type=\"file\"/>\n// <button onclick=\"onUpload()\">Upload</button>\n\nfunction onUpload () {\n  const fileInput = document.querySelector('input') ;\n  const formData = new FormData()\n  formData.append('file', fileInput.files[0]);\n  formData.append('fileName', 'myCustomFilename.pdf')\n\n  fetch('https://api.affinda.com/v1/redacted_resumes/', {\n      method: 'POST',\n      headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        // If you add this, upload won't work\n        // 'Content-Type': 'multipart/form-data'\n      },\n      body: formData,\n    }).then(r => r.json()).then(r => console.log(r))\n\n}\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\nconst fs = require(\"fs\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\nconst readStream = fs.createReadStream(\"PATH_TO_RESUME.pdf\");\n\nclient.createRedactedResume({file: readStream}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n// Can also use a URL:\n\nclient.createRedactedResume({url: \"https://api.affinda.com/static/sample_resumes/example.pdf\"}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       }
@@ -531,20 +525,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nredacted_resume = client.get_redacted_resume(identifier=identifier)\n\nprint(redacted_resume.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/redacted_resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.get(`https://api.affinda.com/v1/redacted_resumes/${identifier}`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.getResume(\"REPLACE_IDENTIFIER\")\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.getRedactedResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       },
@@ -580,20 +573,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nresponse = client.delete_redacted_resume(identifier=identifier)\n\nprint(response.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request DELETE --location \\\n  --url \"https://api.affinda.com/v1/redacted_resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.delete(`https://api.affinda.com/v1/redacted_resumes/${identifier}/`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nasync function main() {\n    let credential = new AffindaCredential(\"REPLACE_TOKEN\")\n\n    const client = new AffindaAPI(credential, {})\n    let resume = await client.deleteResume(\"REPLACE_IDENTIFIER\")\n    console.dir(resume)\n}\n\nmain().catch((e) => console.log(e));\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.deleteRedactedResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       }
@@ -670,20 +662,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nresume_formats = client.get_all_resume_formats()\n\nprint(resume_formats.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/resume_formats\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\ntoken = 'REPLACE_TOKEN';\n\nrequest('https://api.affinda.com/v1/resume_formats', {\n    json: true,\n    headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n    if (err) { return console.log(err); }\n    console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "token = 'REPLACE_TOKEN';\n\nfetch('https://api.affinda.com/v1/resume_formats/', {\n    method: 'GET',\n    headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        'Content-Type': 'application/json',\n    }\n}).then(r => r.json()).then(r => console.log(r))\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\n\nclient.getAllResumeFormats().then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       }
@@ -724,20 +715,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nall_reformatted_resumes = client.get_all_reformatted_resumes()\n\nprint(all_reformatted_resumes.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/reformatted_resumes\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\ntoken = 'REPLACE_TOKEN';\n\nrequest('https://api.affinda.com/v1/reformatted_resumes', {\n    json: true,\n    headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n    if (err) { return console.log(err); }\n    console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "token = 'REPLACE_TOKEN';\n\nfetch('https://api.affinda.com/v1/reformatted_resumes/', {\n    method: 'GET',\n    headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        'Content-Type': 'application/json',\n    }\n}).then(r => r.json()).then(r => console.log(r))\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\n\nclient.getAllReformattedResumes().then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       },
@@ -828,20 +818,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from pathlib import PathAdding basic test suite\n\nfrom affinda import TokenCredential, AffindaAPI\n\ntoken = \"REPLACE_TOKEN\"\nresume_format = \"REPLACE_FORMAT_IDENTIFIER\"\nfile_pth = Path(\"path_to_file\")\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\n\nwith open(file_pth, \"rb\") as f:\n    reformatted_resume = client.create_reformatted_resume(file=f,\n                                                          file_name=file_pth.name,\n                                                          resume_format=resume_format)\n\nprint(reformatted_resume.as_dict())\n"
           },
           {
-            "lang": "Shell + curl",
-            "source": "TOKEN=\"REPLACE_TOKEN\"\nRESUME_FORMAT = \"REPLACE_FORMAT_IDENTIFIER\"\n\nPATH_TO_FILE=\"/path/to/file.pdf\"\n\ncurl --request POST \"https://api.affinda.com/v1/reformatted_resumes/\" \\\n  --location --compressed \\\n  --header \"Authorization: Bearer $TOKEN\" \\\n  --header \"Accept-Encoding: gzip, deflate\" \\\n  --header \"Content-Type: multipart/form-data\" \\\n  --form \"file=@$PATH_TO_FILE\" \\\n  --form \"resumeFormat=$RESUME_FORMAT\" \\\n  --header \"accept: */*\" \\\n"
+            "lang": "shell",
+            "label": "Shell + curl",
+            "source": "TOKEN=\"REPLACE_TOKEN\"\nRESUME_FORMAT=\"Affinda\"\n\nPATH_TO_FILE=\"/path/to/file.pdf\"\n\ncurl --request POST \"https://api.affinda.com/v1/reformatted_resumes/\" \\\n  --location --compressed \\\n  --header \"Authorization: Bearer $TOKEN\" \\\n  --header \"Accept-Encoding: gzip, deflate\" \\\n  --header \"Content-Type: multipart/form-data\" \\\n  --form \"file=@$PATH_TO_FILE\" \\\n  --form \"resumeFormat=$RESUME_FORMAT\" \\\n  --header \"accept: */*\" \\\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet resumeFormat = 'REPLACE_FORMAT_IDENTIFIER'\n\n// With URL\nrequest.post('https://api.affinda.com/v1/reformatted_resumes/', {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n  body: { 'url': 'https://api.affinda.com/static/sample_resumes/example.pdf', 'resumeFormat': resumeFormat }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\nlet resumeFormat = 'REPLACE_FORMAT_IDENTIFIER'\n\n// With URL as input\n\nfetch('https://api.affinda.com/v1/reformatted_resumes/', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({ url: 'https://api.affinda.com/static/sample_resumes/example.pdf', resumeFormat: resumeFormat }),\n}).then(r => r.json()).then(r => console.log(r))\n\n\n// With an uploaded file from a form, e.g.\n// <input type=\"file\"/>\n// <button onclick=\"onUpload()\">Upload</button>\n\nfunction onUpload () {\n  const fileInput = document.querySelector('input') ;\n  const formData = new FormData()\n  formData.append('file', fileInput.files[0]);\n  formData.append('fileName', 'myCustomFilename.pdf')\n  formData.append('resumeFormat', resumeFormat)\n\n  fetch('https://api.affinda.com/v1/reformatted_resumes/', {\n      method: 'POST',\n      headers: {\n        'Authorization': `Bearer ${token}`,\n        'Accept': 'application/json',\n        // If you add this, upload won't work\n        // 'Content-Type': 'multipart/form-data'\n      },\n      body: formData,\n    }).then(r => r.json()).then(r => console.log(r))\n\n}\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\nconst fs = require(\"fs\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\nconst readStream = fs.createReadStream(\"PATH_TO_RESUME.pdf\");\n\nclient.createReformattedResume(\"Affinda\", {file: readStream}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n// Can also use a URL:\n\nclient.createReformattedResume(\"Affinda\", {\n        url: \"https://api.affinda.com/static/sample_resumes/example.pdf\"\n    }\n).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n})\n"
           }
         ]
       }
@@ -885,20 +874,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nreformatted_resume = client.get_reformatted_resume(identifier=identifier)\n\nprint(reformatted_resume.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request GET --location \\\n  --url \"https://api.affinda.com/v1/reformatted_resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.get(`https://api.affinda.com/v1/reformatted_resumes/${identifier}`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` }\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/reformatted_resumes/${identifier}`,\n  {\n    method: 'GET',\n    headers: {\n      'Authorization': `Bearer ${token}`,\n      'Accept': 'application/json',\n      'Content-Type': 'application/json',\n    },\n  }).then(r => r.json()).then(r => console.log(r))\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.getReformattedResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       },
@@ -933,20 +921,19 @@
         },
         "x-codeSamples": [
           {
-            "lang": "Python",
+            "lang": "python",
+            "label": "Python",
             "source": "from affinda import AffindaAPI, TokenCredential\n\ntoken = \"REPLACE_TOKEN\"\nidentifier = \"REPLACE_IDENTIFIER\"\n\ncredential = TokenCredential(token=token)\nclient = AffindaAPI(credential=credential)\nresponse = client.delete_reformatted_resume(identifier=identifier)\n\nprint(response.as_dict())\n\n"
           },
           {
-            "lang": "Shell + curl",
+            "lang": "shell",
+            "label": "Shell + curl",
             "source": "TOKEN=\"REPLACE_TOKEN\"\nIDENTIFIER=\"REPLACE_IDENTIFIER\"\n\ncurl --request DELETE --location \\\n  --url \"https://api.affinda.com/v1/reformatted_resumes/$IDENTIFIER\" \\\n  --header \"Authorization: Bearer $TOKEN\"\n"
           },
           {
-            "lang": "Node JS",
-            "source": "const request = require('request');\n\nlet token = 'REPLACE_TOKEN'\nlet identifier = 'REPLACE_IDENTIFIER'\n\nrequest.delete(`https://api.affinda.com/v1/reformatted_resumes/${identifier}/`, {\n  json: true,\n  headers: { 'Authorization': `Bearer ${token}` },\n}, (err, res, body) => {\n  if (err) { return console.log(err); }\n  console.log(body);\n});\n"
-          },
-          {
-            "lang": "Javascript",
-            "source": "let token = 'REPLACE_TOKEN'\n\nlet identifier = 'REPLACE_IDENTIFIER'\n\nfetch(`https://api.affinda.com/v1/reformatted_resumes/${identifier}`, {\n  method: 'DELETE',\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/json',\n    'Content-Type': 'application/json',\n  }\n})\n"
+            "lang": "js",
+            "label": "Node JS",
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\n\nclient.deleteReformattedResume(\"REPLACE_IDENTIFIER\").then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n"
           }
         ]
       }
