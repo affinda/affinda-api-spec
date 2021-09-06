@@ -8,12 +8,12 @@ properties:
     type: string
     format: url
     nullable: true
-    example: "http://api.affinda.com/v1/resumes?limit=300&offset=300"
+    example: "https://api.affinda.com/v1/resumes?limit=300&offset=300"
   previous:
     type: string
     format: url
     nullable: true
-    example: "http://api.affinda.com/v1/resumes?limit=300"
+    example: "https://api.affinda.com/v1/resumes?limit=300"
   results:
     type: array
     items:

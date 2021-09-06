@@ -189,7 +189,7 @@
           {
             "lang": "js",
             "label": "Node JS",
-            "source": "const {AffindaCredential, Aresumes_postffindaAPI} = require(\"@affinda/affinda\");\nconst fs = require(\"fs\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\nconst readStream = fs.createReadStream(\"PATH_TO_RESUME.pdf\");\n\nclient.createResume({file: readStream}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n// Can also use a URL:\n\nclient.createResume({url: \"https://api.affinda.com/static/sample_resumes/example.pdf\"}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
+            "source": "const {AffindaCredential, AffindaAPI} = require(\"@affinda/affinda\");\nconst fs = require(\"fs\");\n\nconst credential = new AffindaCredential(\"REPLACE_TOKEN\")\nconst client = new AffindaAPI(credential)\nconst readStream = fs.createReadStream(\"PATH_TO_RESUME.pdf\");\n\nclient.createResume({file: readStream}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n\n// Can also use a URL:\n\nclient.createResume({url: \"https://api.affinda.com/static/sample_resumes/example.pdf\"}).then((result) => {\n    console.log(\"Returned data:\");\n    console.dir(result)\n}).catch((err) => {\n    console.log(\"An error occurred:\");\n    console.error(err);\n});\n"
           }
         ]
       }
@@ -1039,13 +1039,13 @@
             "type": "string",
             "format": "url",
             "nullable": true,
-            "example": "http://api.affinda.com/v1/resumes?limit=300&offset=300"
+            "example": "https://api.affinda.com/v1/resumes?limit=300&offset=300"
           },
           "previous": {
             "type": "string",
             "format": "url",
             "nullable": true,
-            "example": "http://api.affinda.com/v1/resumes?limit=300"
+            "example": "https://api.affinda.com/v1/resumes?limit=300"
           },
           "results": {
             "type": "array",
@@ -1070,7 +1070,8 @@
       "Wait": {
         "type": "string",
         "description": "If \"true\" (default), will return a response only after processing has completed. If \"false\", will return an empty data object which can be polled at the GET endpoint until processing is complete.",
-        "example": "true"
+        "example": "true",
+        "default": "true"
       },
       "ResumeLanguage": {
         "type": "string",

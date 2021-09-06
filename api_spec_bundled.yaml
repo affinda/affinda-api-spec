@@ -613,12 +613,12 @@ components:
           type: string
           format: url
           nullable: true
-          example: 'http://api.affinda.com/v1/resumes?limit=300&offset=300'
+          example: 'https://api.affinda.com/v1/resumes?limit=300&offset=300'
         previous:
           type: string
           format: url
           nullable: true
-          example: 'http://api.affinda.com/v1/resumes?limit=300'
+          example: 'https://api.affinda.com/v1/resumes?limit=300'
         results:
           type: array
           items:
@@ -640,6 +640,7 @@ components:
         completed. If "false", will return an empty data object which can be
         polled at the GET endpoint until processing is complete.
       example: 'true'
+      default: 'true'
     ResumeLanguage:
       type: string
       nullable: true
