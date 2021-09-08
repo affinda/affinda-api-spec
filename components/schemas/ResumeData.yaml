@@ -65,7 +65,7 @@ properties:
     example: 12
   headShot:
     type: string
-    format: binary
+    format: byte
     nullable: true
     description: base64 encoded string
   education:

@@ -23,10 +23,15 @@ get:
         application/json:
           schema:
             $ref: "../components/schemas/ReformattedResume.yaml"
+    '400':
+      $ref: "../components/responses/400Error.yaml"
     '401':
       $ref: "../components/responses/401Error.yaml"
     '404':
       $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+
 delete:
   tags:
     - Reformatter
@@ -43,7 +48,12 @@ delete:
   responses:
     '204':
       $ref: "../components/responses/204NoContent.yaml"
+    '400':
+      $ref: "../components/responses/400Error.yaml"
     '401':
       $ref: "../components/responses/401Error.yaml"
     '404':
       $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+

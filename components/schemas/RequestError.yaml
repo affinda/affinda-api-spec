@@ -1,0 +1,12 @@
+type: object
+additionalProperties: false
+required:
+  - detail
+  - statusCode
+properties:
+  detail:
+    type: string
+    example: Invalid token header. No credentials provided.
+  statusCode:
+    type: integer
+    example: 400

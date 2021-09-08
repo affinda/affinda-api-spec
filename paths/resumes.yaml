@@ -14,8 +14,15 @@ get:
         application/json:
           schema:
             $ref: "../components/schemas/GetAllDocumentsResults.yaml"
+    '400':
+      $ref: "../components/responses/400Error.yaml"
     '401':
       $ref: "../components/responses/401Error.yaml"
+    '404':
+      $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+
 post:
   tags:
     - Parser
@@ -47,6 +54,9 @@ post:
       $ref: "../components/responses/401Error.yaml"
     '404':
       $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+
   requestBody:
     description: 'Resume to upload, either via fileupload or URL to a file'
     required: true

@@ -16,18 +16,23 @@ get:
       description: Document identifier
       schema:
         type: string
-        example: ELglqBoT
+        example: ELglqBbT
   responses:
     '200':
-      description: Successfully retrieved resume
+      description: Successfully retrieved redacted resume
       content:
         application/json:
           schema:
             $ref: ../components/schemas/RedactedResume.yaml
+    '400':
+      $ref: "../components/responses/400Error.yaml"
     '401':
-      $ref: ../components/responses/401Error.yaml
+      $ref: "../components/responses/401Error.yaml"
     '404':
-      $ref: ../components/responses/404Error.yaml
+      $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+
 delete:
   tags:
     - Redactor
@@ -45,7 +50,12 @@ delete:
   responses:
     '204':
       $ref: ../components/responses/204NoContent.yaml
+    '400':
+      $ref: "../components/responses/400Error.yaml"
     '401':
-      $ref: ../components/responses/401Error.yaml
+      $ref: "../components/responses/401Error.yaml"
     '404':
-      $ref: ../components/responses/404Error.yaml
+      $ref: "../components/responses/404Error.yaml"
+    default: # For any responses not covered specifically
+      $ref: "../components/responses/DefaultError.yaml"
+

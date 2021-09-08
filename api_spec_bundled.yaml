@@ -62,8 +62,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllDocumentsResults'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
+        '404':
+          $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     post:
       tags:
         - Parser
@@ -99,6 +105,8 @@ paths:
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
       requestBody:
         description: 'Resume to upload, either via fileupload or URL to a file'
         required: true
@@ -148,10 +156,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Resume'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     delete:
       tags:
         - Parser
@@ -168,10 +180,14 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
   /redacted_resumes:
     get:
       tags:
@@ -189,10 +205,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllDocumentsResults'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     post:
       tags:
         - Redactor
@@ -232,6 +252,8 @@ paths:
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
       requestBody:
         description: 'Resume to upload, either via fileupload or URL to a file'
         required: true
@@ -302,18 +324,22 @@ paths:
           description: Document identifier
           schema:
             type: string
-            example: ELglqBoT
+            example: ELglqBbT
       responses:
         '200':
-          description: Successfully retrieved resume
+          description: Successfully retrieved redacted resume
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedactedResume'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     delete:
       tags:
         - Redactor
@@ -331,10 +357,14 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
   /resume_formats:
     get:
       tags:
@@ -378,10 +408,14 @@ paths:
                           $ref: '#/components/schemas/Identifier'
                         formatFile:
                           $ref: '#/components/schemas/ResumeFormatFile'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
   /reformatted_resumes:
     get:
       tags:
@@ -399,10 +433,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllDocumentsResults'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     post:
       tags:
         - Reformatter
@@ -442,6 +480,8 @@ paths:
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
       requestBody:
         description: 'Resume resume to upload, either via a binary file or URL to a file'
         required: true
@@ -493,10 +533,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReformattedResume'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
     delete:
       tags:
         - Reformatter
@@ -513,10 +557,14 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
+        '400':
+          $ref: '#/components/responses/400Error'
         '401':
           $ref: '#/components/responses/401Error'
         '404':
           $ref: '#/components/responses/404Error'
+        default:
+          $ref: '#/components/responses/DefaultError'
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -549,6 +597,19 @@ components:
         The number of documents to skip before starting to collect the result
         set.
   schemas:
+    RequestError:
+      type: object
+      additionalProperties: false
+      required:
+        - detail
+        - statusCode
+      properties:
+        detail:
+          type: string
+          example: Invalid token header. No credentials provided.
+        statusCode:
+          type: integer
+          example: 400
     Identifier:
       type: string
       nullable: true
@@ -758,7 +819,7 @@ components:
           example: 12
         headShot:
           type: string
-          format: binary
+          format: byte
           nullable: true
           description: base64 encoded string
         education:
@@ -1059,49 +1120,29 @@ components:
         error:
           $ref: '#/components/schemas/Error'
   responses:
+    DefaultError:
+      description: UnexpectedError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestError'
+    400Error:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestError'
     401Error:
       description: Authorisation error
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: false
-            properties:
-              detail:
-                type: string
-                example: Invalid token header. No credentials provided.
-              statusCode:
-                type: integer
-                example: 401
-    400Error:
-      description: >-
-        Processing failed for a bad request for some reason, check detail
-        field(s) for more information
-      content:
-        application/json:
-          schema:
-            type: object
-            additionalProperties: false
-            properties:
-              statusCode:
-                type: integer
-                example: 400
-              detail:
-                type: string
-                example: Invalid token header. No credentials provided.
+            $ref: '#/components/schemas/RequestError'
     404Error:
       description: Bad input parameter
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: false
-            properties:
-              detail:
-                type: string
-                example: Not found.
-              statusCode:
-                type: integer
-                example: '404'
+            $ref: '#/components/schemas/RequestError'
     204NoContent:
       description: 'Delete successful, no content returned'

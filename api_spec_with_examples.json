@@ -79,8 +79,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -138,6 +147,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "requestBody": {
@@ -224,11 +236,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -271,11 +289,17 @@
           "204": {
             "$ref": "#/components/responses/204NoContent"
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -324,11 +348,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -394,6 +424,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "requestBody": {
@@ -501,13 +534,13 @@
             "description": "Document identifier",
             "schema": {
               "type": "string",
-              "example": "ELglqBoT"
+              "example": "ELglqBbT"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved resume",
+            "description": "Successfully retrieved redacted resume",
             "content": {
               "application/json": {
                 "schema": {
@@ -516,11 +549,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -564,11 +603,17 @@
           "204": {
             "$ref": "#/components/responses/204NoContent"
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -653,11 +698,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -706,11 +757,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -776,6 +833,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "requestBody": {
@@ -865,11 +925,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -912,11 +978,17 @@
           "204": {
             "$ref": "#/components/responses/204NoContent"
           },
+          "400": {
+            "$ref": "#/components/responses/400Error"
+          },
           "401": {
             "$ref": "#/components/responses/401Error"
           },
           "404": {
             "$ref": "#/components/responses/404Error"
+          },
+          "default": {
+            "$ref": "#/components/responses/DefaultError"
           }
         },
         "x-codeSamples": [
@@ -971,6 +1043,24 @@
       }
     },
     "schemas": {
+      "RequestError": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "detail",
+          "statusCode"
+        ],
+        "properties": {
+          "detail": {
+            "type": "string",
+            "example": "Invalid token header. No credentials provided."
+          },
+          "statusCode": {
+            "type": "integer",
+            "example": 400
+          }
+        }
+      },
       "Identifier": {
         "type": "string",
         "nullable": true,
@@ -1225,7 +1315,7 @@
           },
           "headShot": {
             "type": "string",
-            "format": "binary",
+            "format": "byte",
             "nullable": true,
             "description": "base64 encoded string"
           },
@@ -1615,44 +1705,32 @@
       }
     },
     "responses": {
-      "401Error": {
-        "description": "Authorisation error",
+      "DefaultError": {
+        "description": "UnexpectedError",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "detail": {
-                  "type": "string",
-                  "example": "Invalid token header. No credentials provided."
-                },
-                "statusCode": {
-                  "type": "integer",
-                  "example": 401
-                }
-              }
+              "$ref": "#/components/schemas/RequestError"
             }
           }
         }
       },
       "400Error": {
-        "description": "Processing failed for a bad request for some reason, check detail field(s) for more information",
+        "description": "Bad request",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "statusCode": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Invalid token header. No credentials provided."
-                }
-              }
+              "$ref": "#/components/schemas/RequestError"
+            }
+          }
+        }
+      },
+      "401Error": {
+        "description": "Authorisation error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RequestError"
             }
           }
         }
@@ -1662,18 +1740,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "detail": {
-                  "type": "string",
-                  "example": "Not found."
-                },
-                "statusCode": {
-                  "type": "integer",
-                  "example": "404"
-                }
-              }
+              "$ref": "#/components/schemas/RequestError"
             }
           }
         }
