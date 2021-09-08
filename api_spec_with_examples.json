@@ -1401,6 +1401,12 @@
               }
             }
           },
+          "profession": {
+            "type": "string",
+            "example": "Software Developer",
+            "description": "Prediction of the candidate's profession based on recent work experience",
+            "nullable": true
+          },
           "workExperience": {
             "type": "array",
             "items": {

@@ -885,6 +885,13 @@ components:
                     format: date
                     nullable: true
                     example: '2019-05-01'
+        profession:
+          type: string
+          example: Software Developer
+          description: >-
+            Prediction of the candidate's profession based on recent work
+            experience
+          nullable: true
         workExperience:
           type: array
           items:
