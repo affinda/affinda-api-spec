@@ -11,7 +11,7 @@ info:
 
     * (Recommended) Download and install one of our client libraries:
       * [Python](https://github.com/affinda/affinda-python) : `pip install affinda`
-      * [Javascript](https://github.com/affinda/affinda-python) : `npm install @affinda/affinda`
+      * [Javascript](https://github.com/affinda/affinda-typescript) : `npm install @affinda/affinda`
       * [C# - coming soon](https://github.com/affinda/affinda-csharp)
       * [Java - coming soon](https://github.com/affinda/affinda-java)
 
