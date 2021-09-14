@@ -134,6 +134,11 @@ properties:
     example: 'Software Developer'
     description: Prediction of the candidate's profession based on recent work experience
     nullable: true
+  linkedin:
+    type: string
+    example: 'https://www.linkedin.com/in/user-name'
+    description: Linkedin account associated with the candidate
+    nullable: true
   workExperience:
     type: array
     items:
