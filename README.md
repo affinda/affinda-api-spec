@@ -9,7 +9,7 @@ by [autorest](https://github.com/Azure/autorest):
 - https://github.com/affinda/affinda-python
 - https://github.com/affinda/affinda-typescript
 - https://github.com/affinda/affinda-java
-- https://github.com/affinda/affinda-csharp
+- https://github.com/affinda/affinda-dotnet
 
 It conforms to the [OpenAPI 3.0 specification](https://swagger.io/specification/).
 

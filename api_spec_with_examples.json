@@ -6,7 +6,7 @@
     }
   ],
   "info": {
-    "description": "Documentation for the [Affinda API](https://github.com/affinda/affinda-api-spec).\n# Quickstart\n* Obtain an [API key](https://affinda.com/resume-parser/free-api-key/)\n* (Recommended) Download and install one of our client libraries:\n  * [Python](https://github.com/affinda/affinda-python) : `pip install affinda`\n  * [Javascript](https://github.com/affinda/affinda-typescript) : `npm install @affinda/affinda`\n  * [C# - coming soon](https://github.com/affinda/affinda-csharp)\n  * [Java - coming soon](https://github.com/affinda/affinda-java)\n\n* Without a client library, API requests via HTTP can be made as defined below",
+    "description": "Documentation for the [Affinda API](https://github.com/affinda/affinda-api-spec).\n# Quickstart\n* Obtain an [API key](https://affinda.com/resume-parser/free-api-key/)\n* (Recommended) Download and install one of our client libraries:\n  * [Python](https://github.com/affinda/affinda-python) : `pip install affinda`\n  * [Javascript](https://github.com/affinda/affinda-typescript) : `npm install @affinda/affinda`\n  * [.NET](https://github.com/affinda/affinda-dotnet): `dotnet add package Affinda.API`\n  * [Java - coming soon](https://github.com/affinda/affinda-java)\n\n* Without a client library, API requests via HTTP can be made as defined below",
     "version": "v1",
     "title": "Affinda API",
     "contact": {
